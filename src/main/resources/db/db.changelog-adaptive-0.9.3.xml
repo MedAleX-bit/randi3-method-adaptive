@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+    <changeSet author="dschrimpf" id="org.randi3.method.adaptive-1">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="AdaptiveRandomization"/>
+            </not>
+        </preConditions>
+        <createTable tableName="AdaptiveRandomization">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="Version" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RandomizationMethodId" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="InitialCountBalls" type="INT" >
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="BallsPerSuccess" type="INT" >
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="BallsPerFailure" type="INT"  >
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="dschrimpf" id="org.randi3.method.block-3">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="AdaptiveRandomizationFK_RandomizationMethod"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint baseColumnNames="RandomizationMethodId" baseTableName="AdaptiveRandomization" constraintName="AdaptiveRandomizationFK_RandomizationMethod" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="RandomizationMethod" referencesUniqueColumn="false"/>
+    </changeSet>
+
+</databaseChangeLog>
