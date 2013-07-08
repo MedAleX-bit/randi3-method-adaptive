@@ -1,14 +1,14 @@
 package org.randi3.schema
 
-import org.scalaquery.ql._
-import org.scalaquery.ql.TypeMapper._
-import org.scalaquery.ql.extended.{ExtendedTable => Table}
-import org.scalaquery.ql.extended._
+import scala.slick.driver.ExtendedProfile
+import scala.slick.lifted.DDL
 
 
-class AdaptiveRandomizationSchema(driver: ExtendedProfile) {
+class AdaptiveRandomizationSchema(val driver: ExtendedProfile) {
 
   val schema = new DatabaseSchema(driver)
+  import driver.Implicit._
+  import driver.simple._
 
   object AdaptiveRandomizations extends Table[(Int, Int, Option[Int], Int, Int, Int)]("AdaptiveRandomization") {
     def id = column[Int]("id", O PrimaryKey, O AutoInc)

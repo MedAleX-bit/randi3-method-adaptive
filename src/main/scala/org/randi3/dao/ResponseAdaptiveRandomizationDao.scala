@@ -1,15 +1,14 @@
 package org.randi3.dao
 
 
-import org.scalaquery.session._
-import org.scalaquery.session.Database.threadLocalSession
-import org.scalaquery.ql._
-import org.scalaquery.ql.TypeMapper._
-import org.scalaquery.ql.extended.ExtendedProfile
+import scala.slick.session.Database.threadLocalSession
 
 import org.randi3.randomization.ResponseAdaptiveRandomization
 import scalaz._
 import org.randi3.schema.{DatabaseSchema, AdaptiveRandomizationSchema}
+import scala.slick.driver.ExtendedProfile
+import scala.slick.session.Database
+import scala.slick.lifted.Parameters
 
 class ResponseAdaptiveRandomizationDao(database: Database, driver: ExtendedProfile) extends AbstractRandomizationMethodDao(database, driver) {
 
@@ -36,7 +35,7 @@ class ResponseAdaptiveRandomizationDao(database: Database, driver: ExtendedProfi
           val seed = randomizationMethod.random.nextLong()
           randomizationMethod.random.setSeed(seed)
           RandomizationMethods.noId insert(trialId, generateBlob(randomizationMethod.random).get, randomizationMethod.getClass().getName(), seed)
-          val id = getId(trialId).either match {
+          val id = getId(trialId).toEither match {
             case Left(x) => return Failure(x)
             case Right(id1) => id1
           }
@@ -93,7 +92,7 @@ class ResponseAdaptiveRandomizationDao(database: Database, driver: ExtendedProfi
 
       }
     }
-    get(randomizationMethod.id).either match {
+    get(randomizationMethod.id).toEither match {
       case Left(x) => Failure(x)
       case Right(None) => Failure("Method not found")
       case Right(Some(randomizationMethod)) => Success(randomizationMethod)

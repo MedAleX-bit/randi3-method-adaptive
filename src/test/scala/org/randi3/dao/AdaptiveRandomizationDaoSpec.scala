@@ -10,7 +10,7 @@ import org.scalatest.junit.JUnitRunner
 
 
 @RunWith(classOf[JUnitRunner])
-class AdaptiveRandomizationDaoSpec extends FunSpec with MustMatchers with ShouldMatchers {
+class AdaptiveRandomizationDaoSpec extends FunSpec with MustMatchers {
 
 
   describe("ResponseAdaptiveRandomizationDao create method") {
