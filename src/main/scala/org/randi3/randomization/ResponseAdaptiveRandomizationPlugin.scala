@@ -19,7 +19,7 @@ import scala.slick.lifted.DDL
 class ResponseAdaptiveRandomizationPlugin(database: Database, driver: ExtendedProfile, securityUtil: AbstractSecurityUtil) extends RandomizationMethodPlugin(database, driver, securityUtil) {
 
 
-  private val i18n = new I18NRandomization(I18NHelper.getLocalizationMap("blockRandomizationM", getClass.getClassLoader), securityUtil)
+  private val i18n = new I18NRandomization(I18NHelper.getLocalizationMap("adaptiveRandomizationM", getClass.getClassLoader), securityUtil)
 
   val schema = new AdaptiveRandomizationSchema(driver)
   import schema._
@@ -36,7 +36,7 @@ class ResponseAdaptiveRandomizationPlugin(database: Database, driver: ExtendedPr
   private val adaptiveRandomizationDao = new ResponseAdaptiveRandomizationDao(database, driver)
 
   private def initialCountBallsType = new IntegerConfigurationType(name = i18n.text("initialCountBalls"), description = i18n.text("initialCountBallsDesc"))
-  private def countBallsResponseSuccessType = new IntegerConfigurationType(name = i18n.text("countBallsResponseSuccessType"), description = i18n.text("countBallsResponseSuccessTypeDesc"))
+  private def countBallsResponseSuccessType = new IntegerConfigurationType(name = i18n.text("countBallsResponseSuccess"), description = i18n.text("countBallsResponseSuccessDesc"))
   private def countBallsResponseFailureType = new IntegerConfigurationType(name = i18n.text("countBallsResponseFailure"), description = i18n.text("countBallsResponseFailureDesc"))
 
 
