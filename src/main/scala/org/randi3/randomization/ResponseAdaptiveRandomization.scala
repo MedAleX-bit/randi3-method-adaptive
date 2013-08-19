@@ -56,7 +56,7 @@ case class ResponseAdaptiveRandomization(id: Int = Int.MinValue, version: Int = 
           newUrn
         }
 
-        if (!subject.stages.isEmpty) {
+        if (!subject.stages.isEmpty && !subject.stages.head._2.isEmpty) {
           val responseValue = subject.stages.head._2.head.value
 
           val otherArms = trial.treatmentArms.filter(actArm => actArm.id != arm.id)
