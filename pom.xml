@@ -5,10 +5,10 @@
     <parent>
         <groupId>org.randi3</groupId>
         <artifactId>randi3-methods</artifactId>
-        <version>0.9.4-SNAPSHOT</version>
+        <version>0.9.4</version>
     </parent>
     <artifactId>randi3-method-adaptive</artifactId>
-    <version>0.9.4-SNAPSHOT</version>
+    <version>0.9.4</version>
     <name>RANDI2 - response adaptive randomization methods</name>
     <description>Response adaptive randomization methods</description>
     <url>http://randi2.org</url>
